@@ -197,7 +197,7 @@ def find_page_offset(proceedings_pdf):
     return offset
 
 
-def generate_handbook(path: str, overwrite: bool):
+def generate_handbook(path: str, overwrite: bool, shorter: bool=False):
     root = Path(path)
     build_dir = Path("build")
     build_dir.mkdir(exist_ok=True)
@@ -263,6 +263,7 @@ def generate_handbook(path: str, overwrite: bool):
         workshop_days=workshop_days,
         workshop_papers=workshop_papers,
         build_dir=str(build_dir),
+        detailed=(not shorter)
     )
     tex_file = Path(build_dir, "handbook.tex")
     with open(tex_file, "w+") as f:
