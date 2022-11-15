@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import yaml
+import datetime
 
 
 def normalize_latex_string(text: str) -> str:
@@ -84,6 +85,16 @@ def normalize_program(program):
             for subentry in entry["subsessions"]:
                 subentry["title"] = normalize_latex_string(subentry["title"])
 
+def repdatestr(d):
+    if isinstance(d, list):
+        for thing in d:
+            repdatestr(thing)
+    elif hasattr(d, "keys"):
+        for k in d.keys():
+            if "time" in k and isinstance(d[k], str):
+                d[k] = datetime.datetime.fromisoformat(d[k])
+            else:
+                repdatestr(d[k])
 
 def load_configs_handbook(root: Path):
     """
@@ -115,6 +126,9 @@ def load_configs_handbook(root: Path):
         workshop_programs[workshop["id"]] = load_config(
             "workshops/program_" + str(workshop["id"]), root, required=True
         )
+        repdatestr(workshop_programs[workshop["id"]])
+
+
     workshop_papers = {}
     for workshop in workshops:
         workshop_papers[workshop["id"]] = load_config(
