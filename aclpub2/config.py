@@ -109,10 +109,11 @@ def load_configs_handbook(root: Path):
     prefaces = load_config("prefaces", root)
     organizing_committee = load_config("organizing_committee", root)
     program_committee = load_config("program_committee", root)
-    for block in program_committee:
-        for entry in block["entries"]:
-            for k, v in entry.items():
-                entry[k] = normalize_latex_string(v)
+    if program_committee is not None:
+        for block in program_committee:
+            for entry in block["entries"]:
+                for k, v in entry.items():
+                    entry[k] = normalize_latex_string(v)
     tutorial_program = load_config("tutorial_program", root)
     normalize_program(tutorial_program)
     tutorials = load_config("tutorials", root)

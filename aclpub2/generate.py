@@ -228,6 +228,7 @@ def generate_handbook(path: str, overwrite: bool, shorter: bool=False):
     program_workshops = {}
     for id, workshop_program in workshop_programs.items():
         if workshop_program is not None:
+            print(id)
             program_workshops[id] = process_program(workshop_program)
     workshop_days = []
     for workshop in workshops:

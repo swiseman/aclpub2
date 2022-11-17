@@ -204,6 +204,16 @@
 \newpage
 \BLOCK{endif}
 
+%%%%%%%%%%%%%%%%%%%%%%%
+% COVID-19 Safety
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{flushleft}
+\section{COVID-19 Safety}
+\end{flushleft}
+\vspace*{0.2cm}
+\VAR{load_file(root, "covid19", "covid19.tex")}
+\clearpage
+
 %%%%%%%%%%%
 % Policy %
 %%%%%%%%%%%
@@ -215,9 +225,9 @@
 %%%%%%%%%%%%
 %% Meal_Info %
 %%%%%%%%%%%%
-%\setheaders{Meal Info}{Meal Info}
-%\VAR{load_file(root, "meal", "meal.tex")}
-%\clearpage
+%% \setheaders{Meal Info}{Meal Info}
+%% \ VAR{load_file(root, "meal", "meal.tex")}
+%% \clearpage
 
 %%%%%%%%%%%
 % Social Event
@@ -238,6 +248,14 @@
   \VAR{load_file(root, "invited_talks", talk.abstract_file)}
 \BLOCK{endfor}
 \BLOCK{endif}
+
+%%%%%%%%%%%%%%
+% D \& I
+%%%%%%%%%%%%%
+\setheaders{D\&I Events and Initiatives}{D\&I Events and Initiatives}
+\chapter{D\&I Events and Initiatives}
+\VAR{load_file(root, "affinity_workshops", "affinity_workshops.tex")}
+\clearpage
 
 %%%%%%%%%%%
 % Tutorial %
@@ -395,7 +413,11 @@ During the days of the workshops, \textbf{Registration} will be held from 07:30.
     \begin{longtable}{p{28mm}p{84mm}p{15mm}}
     \BLOCK{for workshop in workshops}
         \BLOCK{if workshop.date is equalto(date) or workshop.date2 is equalto(date)}
+          \BLOCK{if detailed or True}
           \small{\VAR{workshop.location}} & \small{\VAR{workshop.title}} & \small{  p.\pageref{w\VAR{workshop.id}}} \\\\
+          \BLOCK{else}
+          \small{\VAR{workshop.location}} & \small{\VAR{workshop.title}} &  \\\\
+          \BLOCK{endif}
         \BLOCK{endif}
     \BLOCK{endfor}
     \end{longtable}
@@ -415,7 +437,7 @@ During the days of the workshops, \textbf{Registration} will be held from 07:30.
 \BLOCK{endfor}
 \newpage
 
-
+\BLOCK{if detailed or True}
 \BLOCK{for workshop in workshops}
     \section{\VAR{workshop.title}}
     \label{w\VAR{workshop.id}}
@@ -432,6 +454,7 @@ During the days of the workshops, \textbf{Registration} will be held from 07:30.
 
     \end{center}
         {\normalsize \VAR{workshop.abstract}} \leavevmode\newline \leavevmode\newline
+
     \vspace*{0.1cm}
     \setheaders{}{}
 
@@ -464,6 +487,7 @@ During the days of the workshops, \textbf{Registration} will be held from 07:30.
     \BLOCK{endfor}
     \newpage
 \BLOCK{endfor}
+\BLOCK{endif}
 \newpage
 
 %%%%%%%%%%%
@@ -483,14 +507,14 @@ During the days of the workshops, \textbf{Registration} will be held from 07:30.
 \VAR{load_file(root, "venue_map", "venue_map.tex")}
 \newpage
 
-%%%%%%%%%%%%%%%%
-% Author Index %
-%%%%%%%%%%%%%%%%
-\cleardoublepage
-\addcontentsline{toc}{chapter}{Author Index}
-\setheaders{Author Index}{Author Index}
-\printindex
-\newpage
+%%%%%%%%%%%%%%%%%
+%% Author Index %
+%%%%%%%%%%%%%%%%%
+%\cleardoublepage
+%\addcontentsline{toc}{chapter}{Author Index}
+%\setheaders{Author Index}{Author Index}
+%\printindex
+%\newpage
 
 %%%%%%%%%%%%%%
 % Appendices %
