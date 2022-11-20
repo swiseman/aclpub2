@@ -1,5 +1,5 @@
 \PassOptionsToPackage{latin,english}{babel}
-\documentclass[twoside,makeidx]{book}
+\documentclass[twoside,makeidx,hidelinks]{book}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -462,7 +462,8 @@ During the days of the workshops, \textbf{Registration} will be held from 07:30.
     \vspace*{-0.6cm}
       \BLOCK{set ns = namespace(first=true)}
       \BLOCK{for page in pages}
-      \setlength\extrarowheight{-13pt}
+      %\setlength\extrarowheight{-100pt}
+      \vspace*{-0.6cm}
         \begin{longtable}{p{20mm}p{94mm}}
         \BLOCK{for entry in page}
           \BLOCK{if entry.type is equalto("header")}
@@ -505,6 +506,14 @@ During the days of the workshops, \textbf{Registration} will be held from 07:30.
 \setheaders{Venue Map}{Venue Map}
 \chapter{Venue Map}
 \VAR{load_file(root, "venue_map", "venue_map.tex")}
+\newpage
+
+%%%%%%%%%%%%%%
+% Logo
+%%%%%%%%%%%%%%
+\setheaders{EMNLP 2022 Logo}{EMNLP 2022 Logo}
+\chapter{EMNLP 2022 Logo}
+\VAR{load_file(root, "logo_design", "logo_design.tex")}
 \newpage
 
 %%%%%%%%%%%%%%%%%
