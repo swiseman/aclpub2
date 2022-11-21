@@ -106,7 +106,7 @@ def load_configs_handbook(root: Path):
         workshop_programs[workshop["id"]] = load_config(
             "workshops/program_" + str(workshop["id"]), root, required=True
         )
-        repdatestr(workshop_programs[workshop["id"]])
+        #repdatestr(workshop_programs[workshop["id"]])
 
     workshop_papers = {}
     for workshop in workshops:
