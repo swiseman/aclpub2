@@ -209,18 +209,6 @@ def generate_handbook(path: str, overwrite: bool, shorter: bool=False):
         )
     # Load and preprocess the .yml configuration.
     (
-        conference,
-        papers,
-        sponsors,
-        prefaces,
-        organizing_committee,
-        program_committee,
-        tutorial_program,
-        tutorials,
-        invited_talks,
-        additional_pages,
-        program,
-        program_overview,
         workshops,
         workshop_programs,
         workshop_papers,
@@ -236,29 +224,9 @@ def generate_handbook(path: str, overwrite: bool, shorter: bool=False):
         if wdate not in workshop_days:
             workshop_days.append(wdate)
 
-    id_to_paper = {}
-    for paper in papers:
-        id_to_paper[str(paper["id"])] = paper
-
     template = load_template("handbook")
-    program = process_program_handbook(program)
-    tutorial_program = process_program(tutorial_program, max_lines=350)
     rendered_template = template.render(
         root=str(root),
-        conference=conference,
-        conference_dates=get_conference_dates(conference),
-        sponsors=sponsors,
-        prefaces=prefaces,
-        organizing_committee=organizing_committee,
-        program_committee=program_committee,
-        tutorial_program=tutorial_program,
-        tutorials=tutorials,
-        invited_talks=invited_talks,
-        additional_pages=additional_pages,
-        papers=papers,
-        id_to_paper=id_to_paper,
-        program=program,
-        program_overview=program_overview,
         workshops=workshops,
         program_workshops=program_workshops,
         workshop_days=workshop_days,

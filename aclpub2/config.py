@@ -100,27 +100,6 @@ def load_configs_handbook(root: Path):
     """
     Loads all conference configuration files defined in the root directory.
     """
-    conference = load_config("conference_details", root)
-    papers = load_config("papers", root)
-    for paper in papers:
-        paper["title"] = normalize_latex_string(paper["title"])
-        paper["abstract"] = normalize_latex_string(paper["abstract"])
-    sponsors = load_config("sponsors", root)
-    prefaces = load_config("prefaces", root)
-    organizing_committee = load_config("organizing_committee", root)
-    program_committee = load_config("program_committee", root)
-    if program_committee is not None:
-        for block in program_committee:
-            for entry in block["entries"]:
-                for k, v in entry.items():
-                    entry[k] = normalize_latex_string(v)
-    tutorial_program = load_config("tutorial_program", root)
-    normalize_program(tutorial_program)
-    tutorials = load_config("tutorials", root)
-    invited_talks = load_config("invited_talks", root, required=False)
-    additional_pages = load_config("additional_pages", root, required=False)
-    program = load_config("program", root)
-    normalize_program(program)
     workshops = load_config("workshops", root)
     workshop_programs = {}
     for workshop in workshops:
@@ -129,27 +108,12 @@ def load_configs_handbook(root: Path):
         )
         repdatestr(workshop_programs[workshop["id"]])
 
-
     workshop_papers = {}
     for workshop in workshops:
         workshop_papers[workshop["id"]] = load_config(
             "workshops/papers_" + str(workshop["id"]), root, required=True
         )
-    program_overview = load_config("program_overview", root)
-
     return (
-        conference,
-        papers,
-        sponsors,
-        prefaces,
-        organizing_committee,
-        program_committee,
-        tutorial_program,
-        tutorials,
-        invited_talks,
-        additional_pages,
-        program,
-        program_overview,
         workshops,
         workshop_programs,
         workshop_papers,
